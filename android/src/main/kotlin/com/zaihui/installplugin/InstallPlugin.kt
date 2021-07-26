@@ -24,9 +24,9 @@ import java.io.FileNotFoundException
  */
 class InstallPlugin(private val registrar: Registrar) : MethodCallHandler {
     companion object {
-        private const val installRequestCode = 1234
-        private var apkFile: File? = null
-        private var appId: String? = null
+         const val installRequestCode = 1234
+         var apkFile: File? = null
+         var appId: String? = null
 
         @JvmStatic
         fun registerWith(registrar: Registrar): Unit { 
@@ -68,7 +68,7 @@ class InstallPlugin(private val registrar: Registrar) : MethodCallHandler {
         }
     }
 
-    private fun installApk(filePath: String?, currentAppId: String?) {
+     fun installApk(filePath: String?, currentAppId: String?) {
         if (filePath == null) throw NullPointerException("fillPath is null!")
         val activity: Activity =
             registrar.activity() ?: throw NullPointerException("context is null!")
@@ -88,7 +88,7 @@ class InstallPlugin(private val registrar: Registrar) : MethodCallHandler {
     }
 
 
-    private fun showSettingPackageInstall(activity: Activity) { // todo to test with android 26
+     fun showSettingPackageInstall(activity: Activity) { // todo to test with android 26
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             Log.d("SettingPackageInstall", ">= Build.VERSION_CODES.O")
             val intent = Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES)
@@ -100,11 +100,11 @@ class InstallPlugin(private val registrar: Registrar) : MethodCallHandler {
 
     }
 
-    private fun canRequestPackageInstalls(activity: Activity): Boolean {
+     fun canRequestPackageInstalls(activity: Activity): Boolean {
         return Build.VERSION.SDK_INT <= Build.VERSION_CODES.O || activity.packageManager.canRequestPackageInstalls()
     }
 
-    private fun installBelow24(context: Context, file: File?) {
+     fun installBelow24(context: Context, file: File?) {
         val intent = Intent(Intent.ACTION_VIEW)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         val uri = Uri.fromFile(file)
@@ -119,7 +119,7 @@ class InstallPlugin(private val registrar: Registrar) : MethodCallHandler {
      * 在android 6.0 以上如果没有动态申请文件读写权限，会导致文件读取失败，你将会收到一个异常。
      * 插件中不封装申请权限逻辑，是为了使模块功能单一，调用者可以引入独立的权限申请插件
      */
-    private fun install24(context: Context?, file: File?, appId: String?) {
+     fun install24(context: Context?, file: File?, appId: String?) {
         if (context == null) throw NullPointerException("context is null!")
         if (file == null) throw NullPointerException("file is null!")
         if (appId == null) throw NullPointerException("appId is null!")
