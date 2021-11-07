@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/services.dart';
 
 class InstallPlugin {
-  static const MethodChannel _channel = const MethodChannel('install_plugin');
+  static const MethodChannel _channel = MethodChannel('install_plugin');
 
   /// for Android : install apk by its file absolute path;
   /// if the target platform is higher than android 24:

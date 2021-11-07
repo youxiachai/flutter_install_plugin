@@ -28,7 +28,7 @@ class _MyAppState extends State<MyApp> {
             TextField(
               decoration: InputDecoration(
                   hintText:
-                      'apk file name to install. Like demo.apk'),
+                      'app data files apk file name to install. Like demo.apk'),
               onChanged: (path) {
                 print('onChanged $path');
                 _apkFilePath = path;

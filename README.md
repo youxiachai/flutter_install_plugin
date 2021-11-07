@@ -1,7 +1,10 @@
 # install_plugin_v2
 
+[![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/youxiachai/flutter_install_plugin/blob/master/LICENSE)
 
-A flutter plugin for install apk for android;
+A flutter plugin for install apk for android, use flutter embedding v2
+
+Thanks [https://github.com/hui-z/flutter_install_plugin](https://github.com/hui-z/flutter_install_plugin)
 
 ## Usage
 
@@ -23,14 +26,9 @@ To use this plugin, add `install_plugin_v2` as a dependency in your pubspec.yaml
 
 For Android, you may need to request permission for READ_EXTERNAL_STORAGE to read the apk file. In the example, I used the `permission_handler` [plugin](https://pub.dartlang.org/packages/permission_handler).
 
+please push you demo apk in `/storage/emulated/0/Android/data/com.youxiachai.installpluginexample/files/`
+
 ```dart
-import 'dart:async';
-
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:install_plugin/install_plugin.dart';
-import 'package:permission_handler/permission_handler.dart';
-
 void main() => runApp(new MyApp());
 
 class MyApp extends StatefulWidget {
@@ -40,7 +38,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   String _appUrl = '';
-  String _apkFilePath = '';
+  String _apkFilePath = 'demo.apk';
 
   @override
   Widget build(BuildContext context) {
@@ -54,22 +52,16 @@ class _MyAppState extends State<MyApp> {
             TextField(
               decoration: InputDecoration(
                   hintText:
-                      'apk file path to install. Like /storage/emulated/0/demo/update.apk'),
-              onChanged: (path) => _apkFilePath = path,
+                      'appdata files apk file name to install. Like demo.apk'),
+              onChanged: (path) {
+                _apkFilePath = path;
+              },
             ),
-            FlatButton(
+            TextButton(
                 onPressed: () {
                   onClickInstallApk();
                 },
                 child: Text('install')),
-            TextField(
-              decoration:
-                  InputDecoration(hintText: 'URL for app store to launch'),
-              onChanged: (url) => _appUrl = url,
-            ),
-            FlatButton(
-                onPressed: () => onClickGotoAppStore(_appUrl),
-                child: Text('gotoAppStore'))
           ],
         ),
       ),
@@ -81,25 +73,29 @@ class _MyAppState extends State<MyApp> {
       print('make sure the apk file is set');
       return;
     }
-    Map<PermissionGroup, PermissionStatus> permissions =
-        await PermissionHandler().requestPermissions([PermissionGroup.storage]);
-    if (permissions[PermissionGroup.storage] == PermissionStatus.granted) {
-      InstallPlugin.installApk(_apkFilePath, 'com.zaihui.installpluginexample')
+    var permissions = await Permission.storage.status;
+    if (permissions.isGranted) {
+      var storageDir = await getExternalStorageDirectory();
+      final dirPath = storageDir?.path ?? '/';
+
+      final resultPath = '$dirPath' + '/' + '$_apkFilePath';
+   
+      var file = File(resultPath);
+      var isExists = await file.exists();
+      print('onClickInstallApk _apkFilePath $resultPath exists $isExists');     
+
+      InstallPlugin.installApk(
+              resultPath, 'com.youxiachai.installpluginexample')
           .then((result) {
         print('install apk $result');
+        
+
       }).catchError((error) {
         print('install apk error: $error');
       });
     } else {
       print('Permission request fail!');
     }
-  }
-
-  void onClickGotoAppStore(String url) {
-    url = url.isEmpty
-        ? 'https://itunes.apple.com/cn/app/%E5%86%8D%E6%83%A0%E5%90%88%E4%BC%99%E4%BA%BA/id1375433239?l=zh&ls=1&mt=8'
-        : url;
-    InstallPlugin.gotoAppStore(url);
   }
 }
 
