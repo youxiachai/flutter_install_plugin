@@ -1,4 +1,4 @@
-package com.zaihui.installplugin
+package com.youxiachai.installplugin
 
 import android.app.Activity
 import android.content.Context

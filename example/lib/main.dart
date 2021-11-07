@@ -67,9 +67,9 @@ class _MyAppState extends State<MyApp> {
   }
 
   void onClickGotoAppStore(String url) {
-    url = url.isEmpty
-        ? 'https://itunes.apple.com/cn/app/%E5%86%8D%E6%83%A0%E5%90%88%E4%BC%99%E4%BA%BA/id1375433239?l=zh&ls=1&mt=8'
-        : url;
-    InstallPlugin.gotoAppStore(url);
+    // url = url.isEmpty
+    //     ? 'https://itunes.apple.com/cn/app/%E5%86%8D%E6%83%A0%E5%90%88%E4%BC%99%E4%BA%BA/id1375433239?l=zh&ls=1&mt=8'
+    //     : url;
+    // InstallPlugin.gotoAppStore(url);
   }
 }

@@ -1,9 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="com.zaihui.installplugin">
+  package="com.youxiachai.installplugin">
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
     <application>
         <provider
-            android:name="com.zaihui.installplugin.FileProvider"
+            android:name="com.youxiachai.installplugin.FileProvider"
             android:authorities="${applicationId}.fileProvider.install"
             android:exported="false"
             android:grantUriPermissions="true">

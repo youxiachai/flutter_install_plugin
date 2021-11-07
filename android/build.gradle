@@ -1,5 +1,5 @@
 
-group ' com.zaihui.installplugin'
+group ' com.youxiachai.installplugin'
 version '1.0-SNAPSHOT'
 
 buildscript {
