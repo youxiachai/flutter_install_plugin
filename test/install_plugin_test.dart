@@ -30,17 +30,17 @@ void main() {
     expect(result, response);
   });
 
-  test('gotoAppStore test', () async {
-    response = null;
-    final fakeUrl = 'fake_url';
-    final String? result = await InstallPlugin.gotoAppStore(fakeUrl);
-    expect(
-      log,
-      <Matcher>[
-        isMethodCall('gotoAppStore', arguments: {'urlString': fakeUrl})
-      ],
-    );
-    expect(result, isNull);
-  });
+  // test('gotoAppStore test', () async {
+  //   response = null;
+  //   final fakeUrl = 'fake_url';
+  //   final String? result = await InstallPlugin.gotoAppStore(fakeUrl);
+  //   expect(
+  //     log,
+  //     <Matcher>[
+  //       isMethodCall('gotoAppStore', arguments: {'urlString': fakeUrl})
+  //     ],
+  //   );
+  //   expect(result, isNull);
+  // });
 
 }

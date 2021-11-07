@@ -1,15 +1,11 @@
-# install_plugin
-
-[![Build Status](https://travis-ci.org/hui-z/flutter_install_plugin.svg?branch=master)](https://travis-ci.org/hui-z/flutter_install_plugin#)
-[![pub package](https://img.shields.io/pub/v/install_plugin.svg)](https://pub.dartlang.org/packages/install_plugin)
-[![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/hui-z/flutter_install_plugin/blob/master/LICENSE)
+# install_plugin_v2
 
 
-A flutter plugin for install apk for android; and using url to go to app store for iOS.
+A flutter plugin for install apk for android;
 
 ## Usage
 
-To use this plugin, add `install_plugin` as a dependency in your pubspec.yaml file. 
+To use this plugin, add `install_plugin_v2` as a dependency in your pubspec.yaml file. 
 
 ```dart
   /// for Android : install apk by its file absolute path;
@@ -21,11 +17,6 @@ To use this plugin, add `install_plugin` as a dependency in your pubspec.yaml fi
     return await _channel.invokeMethod('installApk', params);
   }
 
-  /// for iOS: go to app store by the url
-  static Future<String> gotoAppStore(String urlString) async {
-    Map<String, String> params = {'urlString': urlString};
-    return await _channel.invokeMethod('gotoAppStore', params);
-  }
 ```
 
 ### Example
