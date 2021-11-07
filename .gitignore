@@ -10,3 +10,11 @@ build/
 
 example/.flutter-plugins-dependencies
 example/ios/Flutter/flutter_export_environment.sh
+android/.settings/org.eclipse.buildship.core.prefs
+android/.project
+android/.classpath
+example/android/.project
+example/android/.settings/org.eclipse.buildship.core.prefs
+example/android/app/.classpath
+example/android/app/.project
+example/android/app/.settings/org.eclipse.buildship.core.prefs
