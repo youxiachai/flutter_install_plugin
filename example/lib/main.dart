@@ -5,30 +5,30 @@ import 'package:install_plugin_v2/install_plugin_v2.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:path_provider/path_provider.dart';
 
-void main() => runApp(new MyApp());
+void main() => runApp(const MyApp());
 
 class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
-  _MyAppState createState() => new _MyAppState();
+  _MyAppState createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
-  String _appUrl = '';
+  final String _appUrl = '';
   String _apkFilePath = 'demo.apk';
 
   @override
   Widget build(BuildContext context) {
-    return new MaterialApp(
-      home: new Scaffold(
-        appBar: new AppBar(
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
           title: const Text('Plugin example app'),
         ),
-        body: new Column(
+        body: Column(
           children: <Widget>[
             TextField(
-              decoration: InputDecoration(
-                  hintText:
-                      'app data files apk file name to install. Like demo.apk'),
+              decoration: const InputDecoration(hintText: 'app data files apk file name to install. Like demo.apk'),
               onChanged: (path) {
                 print('onChanged $path');
                 _apkFilePath = path;
@@ -40,7 +40,7 @@ class _MyAppState extends State<MyApp> {
 
                   //
                 },
-                child: Text('install')),
+                child: const Text('install')),
             // TextField(
             //   decoration:
             //       InputDecoration(hintText: 'URL for app store to launch'),
@@ -65,18 +65,14 @@ class _MyAppState extends State<MyApp> {
       var storageDir = await getExternalStorageDirectory();
       final dirPath = storageDir?.path ?? '/';
 
-      final resultPath = '$dirPath' + '/' + '$_apkFilePath';
-   
+      final resultPath = dirPath + '/' + _apkFilePath;
+
       var file = File(resultPath);
       var isExists = await file.exists();
-      print('onClickInstallApk _apkFilePath $resultPath exists $isExists');     
+      print('onClickInstallApk _apkFilePath $resultPath exists $isExists');
 
-      InstallPlugin.installApk(
-              resultPath, 'com.youxiachai.installpluginexample')
-          .then((result) {
+      InstallPlugin.installApk(resultPath, 'com.youxiachai.installpluginexample').then((result) {
         print('install apk $result');
-        
-
       }).catchError((error) {
         print('install apk error: $error');
       });
